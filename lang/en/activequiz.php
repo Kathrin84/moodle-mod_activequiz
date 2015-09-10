@@ -274,6 +274,8 @@ $string['timecompleted'] = 'Time completed';
 $string['attempt_grade'] = 'Attempt grade';
 $string['response_attempt_controls'] = 'Edit/View Attempt';
 $string['timemodified'] = 'Time modified';
+$string['anonymous_group'] = 'Anonymous group';
+$string['anonymous_user'] = 'Anonymous user';
 
 // view own attempts table and related strings
 $string['sessionname'] = 'Session name';

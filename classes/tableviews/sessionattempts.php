@@ -116,13 +116,23 @@ class sessionattempts extends \flexible_table implements \renderable {
             if (!$download) {
 
                 if ($this->rtq->group_mode()) {
-
-                    $userlink = $item->groupname . ' (<a href="' . $CFG->wwwroot . '/user/view.php?id=' . $item->userid .
+                    //if anonymized mode is on, the identities of the students and their answers should not be revealed
+                    if($this->rtq->getRTQ()->anonymizeresponses == 1){
+                        $userlink = '<p>' . get_string('anonymous_group', 'activequiz') . '</p>';
+                    }
+                    else{
+                        $userlink = $item->groupname . ' (<a href="' . $CFG->wwwroot . '/user/view.php?id=' . $item->userid .
                         '&amp;course=' . $this->rtq->getCourse()->id . '">' . $item->takenby . '</a>)';
-
+                    }
                 } else {
-                    $userlink = '<a href="' . $CFG->wwwroot . '/user/view.php?id=' . $item->userid .
+                    //if anonymized mode is on, the identities of the students and their answers should not be revealed
+                    if($this->rtq->getRTQ()->anonymizeresponses == 1){
+                        $userlink = '<p>' . get_string('anonymous_user', 'activequiz') . '</p>';
+                    }
+                    else{
+                        $userlink = '<a href="' . $CFG->wwwroot . '/user/view.php?id=' . $item->userid .
                         '&amp;course=' . $this->rtq->getCourse()->id . '">' . $item->username . '</a>';
+                    }
                 }
                 $row[] = $userlink;
             } else {

@@ -73,6 +73,8 @@ class mod_activequiz_mod_form extends moodleform_mod {
         $mform->addElement('checkbox', 'graded', get_string('assessed', 'activequiz'));
         $mform->addHelpButton('graded', 'assessed', 'activequiz');
         $mform->setDefault('graded', 1);
+        //Disable if anonymized option is enabled
+        $mform->disabledIf('graded', 'anonymizeresponses', 'checked');
 
         $mform->addElement('text', 'scale', get_string('scale', 'activequiz'));
         $mform->addRule('scale', null, 'numeric', null, 'client');
@@ -80,12 +82,16 @@ class mod_activequiz_mod_form extends moodleform_mod {
         $mform->setDefault('scale', 10);
         $mform->setType('scale', PARAM_INT);
         $mform->addHelpButton('scale', 'scale', 'activequiz');
+        //Disable if anonymized option is enabled
+        $mform->disabledIf('scale', 'anonymizeresponses', 'checked');
 
         $mform->addElement('select', 'grademethod',
             get_string('grademethod', 'activequiz'),
             \mod_activequiz\utils\scaletypes::get_display_types());
         $mform->setType('grademethod', PARAM_INT);
         $mform->addHelpButton('grademethod', 'grademethod', 'activequiz');
+        //Disable if anonymized option is enabled
+        $mform->disabledIf('grademethod', 'anonymizeresponses', 'checked');
 
 
         // check if there are any sessions on this realtime quiz
